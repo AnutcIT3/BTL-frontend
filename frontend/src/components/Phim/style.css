@@ -1,0 +1,154 @@
+/* Container tổng thể */
+.phim-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* --- PHẦN TABS --- */
+.phim-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.phim-tabs button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    transition: 0.3s;
+    padding-bottom: 8px;
+}
+
+.phim-tabs button.active {
+    color: #b01a2c; /* Màu đỏ KOF */
+    border-bottom: 2px solid #b01a2c;
+}
+
+/* --- PHẦN GRID PHIM --- */
+.phim-grid {
+    display: grid;
+    /* Tự động điều chỉnh số cột, tối thiểu 220px mỗi phim */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* --- THẺ PHIM (CARD) --- */
+.phim-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.phim-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+
+/* --- PHẦN ẢNH VÀ OVERLAY (CHÍNH XỨC CÁCH SỬA) --- */
+.phim-img {
+    position: relative; /* QUAN TRỌNG: Để overlay căn theo phần tử này */
+    width: 100%;
+    /* Tỉ lệ ảnh poster chuẩn (tăng chiều cao) */
+    padding-top: 145%; 
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.phim-img img {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; /* Cắt ảnh đẹp, không bị móp */
+}
+
+/* Lớp phủ Xem Trailer */
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Nền mờ khi di chuột vào */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* 1. Mặc định là ẩn */
+    opacity: 0; 
+    
+    color: white;
+    transition: all 0.4s ease-in-out;
+    z-index: 2; /* Đảm bảo nằm trên ảnh */
+}
+
+/* 2. Khi di chuột vào ảnh phim, hiện overlay lên */
+.phim-img:hover .overlay {
+    opacity: 1;
+}
+
+/* Biểu tượng play */
+.play-icon {
+    font-size: 3rem;
+    margin-bottom: 8px;
+}
+
+.overlay p {
+    margin: 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* --- BADGE (NHÃN TUỔI) --- */
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    z-index: 3; /* Nằm trên cả overlay */
+}
+
+/* Màu riêng cho từng loại badge */
+.badge.T18 { background: #e53e3e; }
+.badge.T13 { background: #dd6b20; }
+.badge.P { background: #38a169; }
+
+/* --- THÔNG TIN PHIM --- */
+.phim-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.phim-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Cắt tên quá dài bằng "..." */
+}
+
+/* --- NÚT MUA VÉ --- */
+.btn-book {
+    background: #b01a2c;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-book:hover {
+    background: #ec1d24; /* Màu sáng hơn khi di chuột */
+}

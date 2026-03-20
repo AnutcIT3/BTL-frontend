@@ -1,23 +1,32 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import NavMenu from './components/NavMenu'
-import Hero from './components/Hero'
-import MovieList from './components/MovieList'
-import Footer from './components/Footer'
-import './App.css'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavMenu from './components/NavMenu';
+import Hero from './components/Hero';
+import MovieList from './components/MovieList';
+import Footer from './components/Footer';
+import KhuyenMai from './components/KhuyenMai';
+import Phim from './components/Phim';
+import './App.css';
 
 function App() {
   return (
-    <>
-    <NavMenu/>
-    <Hero/>
-    <MovieList/>
-    <Footer/>
-    </>
-  )
+    <BrowserRouter>
+      <NavMenu />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero />
+            <MovieList />
+          </>
+        } />
+        <Route path="/phim" element={<Phim />} />
+        <Route path="/khuyen-mai" element={<KhuyenMai />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
 
 
 
