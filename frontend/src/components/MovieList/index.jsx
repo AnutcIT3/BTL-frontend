@@ -6,10 +6,12 @@ import Doraemon45 from '../../assets/Doraemon45.webp'
 import QNT from '../../assets/QNT.jpg'
 import CONDTCT from '../../assets/CONDTCT.jpg'
 import MP from '../../assets/Mui_Pho.webp'
+import PaymentPage from '../Payment';
 
 function MovieList() {
   // tab = 1: Phim đang chiếu, tab = 2: Phim sắp chiếu
   const [activeTab, setActiveTab] = useState(1);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   // Thêm thuộc tính trailer vào mỗi đối tượng phim
   const moviesPlaying = [
@@ -44,7 +46,6 @@ function MovieList() {
       trailer: "https://www.youtube.com/watch?v=7L5qkIkkcY8"
     }
   ];
-
   const moviesComing = [
     { 
       id: 3, 
@@ -62,7 +63,14 @@ function MovieList() {
 
   // Chọn danh sách hiển thị dựa trên tab đang active
   const currentMovies = activeTab === 1 ? moviesPlaying : moviesComing;
-
+  if (selectedMovie) {
+    return (
+      <PaymentPage 
+        movie={selectedMovie} 
+        onBack={() => setSelectedMovie(null)} 
+      />
+    );
+  }
   return (
     <div className="movie-section">
       <div className="tab-container">
@@ -88,7 +96,9 @@ function MovieList() {
               <img src={movie.img} alt={movie.title}/>
             </a>
             <h3>{movie.title}</h3>
-            <button className="btn-buy">MUA VÉ</button>
+            <button className="btn-buy"
+             onClick={() => setSelectedMovie(movie)}
+            >MUA VÉ</button>
           </div>
         ))}
       </div>

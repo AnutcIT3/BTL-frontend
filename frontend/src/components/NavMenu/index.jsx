@@ -15,7 +15,7 @@ function NavMenu() {
 
         {/* Phần Menu đường dẫn */}
         <ul className="nav-links">
-          <li><a href="/rap-phim">Rạp Phim</a></li>
+          <li><Link to="/Rap-phim">Rạp phim</Link></li>
           <li><a href="/lich-chieu">Lịch Chiếu</a></li>
           <li><a href="/gia-ve">Giá Vé</a></li>
           <li><Link name="phhim" to="/phim">Phim</Link></li>

@@ -6,16 +6,18 @@ import Footer from './components/Footer';
 import KhuyenMai from './components/KhuyenMai';
 import Phim from './components/Phim';
 import './App.css';
+import Movie from './components/Movie';
 
 function App() {
   return (
     <BrowserRouter>
       <NavMenu />
       <Routes>
-        <Route path="/" element={
+        <Route path="/Rap-phim" element={
           <>
             <Hero />
             <MovieList />
+            <Movie/>
           </>
         } />
         <Route path="/phim" element={<Phim />} />
