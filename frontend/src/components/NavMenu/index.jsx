@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css'; // Chúng ta sẽ tạo file CSS này sau
+import './style.css'; 
 import logoImg from '../../assets/logo.png'
 import { Link } from 'react-router-dom';
 function NavMenu() {

@@ -88,3 +88,10 @@
 .btn-buy:hover {
   background-color: #B01E2E;
 }
+
+.movie-card p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}

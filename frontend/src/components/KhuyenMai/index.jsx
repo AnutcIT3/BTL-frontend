@@ -79,7 +79,7 @@ function KhuyenMai() {
             const signedTx = await tx.sign().complete();
             const txHash = await signedTx.submit();
 
-            alert(`🎉 Chúc mừng! Bạn đã nhận được ${rewardAmount} tADA từ Admin.\nTransaction Hash: ${txHash}`);
+            alert(`Chúc mừng! Bạn đã nhận được ${rewardAmount} tADA từ Admin.\nTransaction Hash: ${txHash}`);
         } catch (error) {
             console.error("Lỗi giao dịch:", error);
             alert("Giao dịch thất bại! Hãy kiểm tra số dư ví Admin hoặc ID Blockfrost.");

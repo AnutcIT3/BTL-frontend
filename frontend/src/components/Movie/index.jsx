@@ -21,7 +21,9 @@ const Movie = () => {
             <div className="movie-grid">
                 {movies.map(movie => (
                     <div key={movie.movie_id} className="movie-card">
-                        <img src={movie.poster_url} alt={movie.title} />
+                        <a href={movie.trailer_url} target="_blank" rel="noopener noreferrer">
+                             <img src={movie.poster_url} alt={movie.title}/>
+                        </a>
                         <h3>{movie.title}</h3>
                         <p>{movie.genre}</p>
                         <button>Đặt vé ngay</button>

@@ -6,7 +6,7 @@ import Doraemon45 from '../../assets/Doraemon45.webp'
 import QNT from '../../assets/QNT.jpg'
 import CONDTCT from '../../assets/CONDTCT.jpg'
 import MP from '../../assets/Mui_Pho.webp'
-import PaymentPage from '../Payment';
+import PaymentPage from '../PaymentPage';
 
 function MovieList() {
   // tab = 1: Phim đang chiếu, tab = 2: Phim sắp chiếu
@@ -64,9 +64,11 @@ function MovieList() {
   // Chọn danh sách hiển thị dựa trên tab đang active
   const currentMovies = activeTab === 1 ? moviesPlaying : moviesComing;
   if (selectedMovie) {
-    return (
-      <PaymentPage 
+    return(
+    <PaymentPage 
         movie={selectedMovie} 
+        selectedSeats={["A1", "A2"]} 
+        showtime={{ start_time: "19:00 | Hôm nay" }}
         onBack={() => setSelectedMovie(null)} 
       />
     );
