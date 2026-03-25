@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
 import Thooi from '../../assets/Thỏ_ơi.webp'
-import Tai from '../../assets/Tài_poster.jpg'
+import Tai from '../../assets/Tai_poster.jpg'
 import Doraemon45 from '../../assets/Doraemon45.webp'
 import QNT from '../../assets/QNT.jpg'
 import CONDTCT from '../../assets/CONDTCT.jpg'

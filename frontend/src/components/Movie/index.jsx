@@ -17,17 +17,23 @@ const Movie = () => {
 
     return (
         <div>
+            
             <h1>Danh sách phim</h1>
             <div className="movie-grid">
                 {movies.map(movie => (
-                    <div key={movie.movie_id} className="movie-card">
-                        <a href={movie.trailer_url} target="_blank" rel="noopener noreferrer">
-                             <img src={movie.poster_url} alt={movie.title}/>
-                        </a>
-                        <h3>{movie.title}</h3>
-                        <p>{movie.genre}</p>
-                        <button>Đặt vé ngay</button>
-                    </div>
+                <div key={movie.movie_id} className="movie-card">
+                {/* Chỉ để lại một thẻ img chuẩn và bọc trong link trailer */}
+                 <a href={movie.trailer_url} target="_blank" rel="noopener noreferrer">
+                  <img 
+                    src={new URL(`../../assets/${movie.poster_url}`, import.meta.url).href}
+                    alt={movie.title}
+                    onError={(e) => { e.target.src = 'https://via.placeholder.com/200x300?text=No+Image'; }} 
+                  />
+                 </a> 
+                 <h3>{movie.title}</h3>
+                 <p>{movie.genre}</p>
+                 <button className="btn-buy">Đặt vé ngay</button>
+                 </div>
                 ))}
             </div>
         </div>
