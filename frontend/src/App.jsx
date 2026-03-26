@@ -7,6 +7,8 @@ import Phim from './components/Phim/Phim';
 import './App.css';
 import Movie from './components/Movie/Movie';
 import UserProfile from './components/Userservices/UserProfile';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/phim" element={<Phim />} />
         <Route path="/khuyen-mai" element={<KhuyenMai />} />
         <Route path="/user" element={<UserProfile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </BrowserRouter>

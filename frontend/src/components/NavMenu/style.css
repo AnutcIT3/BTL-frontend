@@ -1,30 +1,29 @@
 .navbar {
-  /* 1. Cố định vị trí */
   position: fixed; 
   top: 0;
   left: 0;
-  
-  /* 2. Tràn hết chiều ngang */
   width: 100vw; 
-  background-color: var(--color-dark-burgundy);
+  
+
+  background-color: #6A1B24; 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  
   height: 80px; 
-  
-  /* 3. Đảm bảo luôn nằm trên các nội dung khác */
   z-index: 9999; 
-  
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  
+
+  box-shadow: 0 2px 15px rgba(106, 27, 36, 0.08); 
+  border-bottom: 1px solid rgba(217, 143, 166, 0.2);
   margin: 0;
 }
+
 .nav-container {
-  /* 4. Giới hạn chiều ngang của nội dung (Logo và Menu) */
   max-width: 1200px;
   width: 100%;
-  
-  /* 5. Căn giữa khối nội dung này */
   margin: 0 auto;
-  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,85 +31,76 @@
   height: 100%;
 }
 
+/* --- 3. LOGO --- */
 .nav-logo {
   position: relative;
-  /* Để logo to hơn mà không đẩy nav cao lên */
-  width: 120px; 
+  width: 150px; 
 }
 
 .logo-image {
-  /* Logo to vượt ra ngoài thanh nav */
-  height: 110px; 
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  z-index: 1001;
-}
-
-.nav-logo {
-  position: relative;
-  width: 150px; /* 2. Để một khoảng trống cố định cho logo */
-}
-
-.logo-image {
-  /* 3. Phóng to logo và cho nó đè lên trên */
-  height: 100px;  /* Tăng lên 100px hoặc tùy ý bạn */
+  height: 100px; 
   width: auto;
   position: absolute; 
   top: 50%;
-  transform: translateY(-50%); /* Căn giữa logo theo chiều dọc */
+  transform: translateY(-50%);
   left: 0;
   object-fit: contain;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); /* Thêm đổ bóng cho nổi bật */
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.948));
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.logo-image {
-  height: 100px; /* Điều chỉnh độ cao logo cho vừa mắt */
-  width: auto;  /* Giữ đúng tỉ lệ ảnh */
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
+
 .logo-image:hover {
-  transform: scale(2.1);
-}
-
-
-/* Chữ TICKET dùng màu hồng nhạt để nổi bật */
-.nav-logo span {
-  color: var(--color-medium-pink);
+  transform: translateY(-50%) scale(1.1); 
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 35px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
-  color: var(--color-light-pink);
+
+  color: white; 
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
   transition: all 0.3s ease;
 }
 
-/* Hiệu ứng khi di chuột vào: đổi sang màu hồng trung bình */
 .nav-links a:hover {
-  color: var(--color-medium-pink);
+  color: var(--color-primary-red);
   transform: translateY(-2px);
 }
 
+/* --- 5. NÚT LOGIN --- */
 .btn-login {
-  /* Nút bấm sử dụng màu đỏ sáng hơn để kêu gọi hành động */
   background-color: var(--color-primary-red);
   color: white;
   border: none;
-  padding: 10px 25px;
-  border-radius: 25px; /* Bo tròn mềm mại hơn */
+  padding: 10px 28px;
+  border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(200, 75, 94, 0.2);
+  transition: all 0.3s ease;
 }
 
 .btn-login:hover {
   background-color: var(--color-deep-red);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(176, 30, 46, 0.3);
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .logo-image {
+    height: 70px;
+  }
 }

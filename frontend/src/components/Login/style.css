@@ -1,0 +1,345 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Thu hẹp padding-top xuống một chút, đủ né header 80px */
+  padding: 90px 20px 20px;
+  width: 100vw;
+  box-sizing: border-box;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  /* Màu chuẩn nếu ảnh bị lỗi */
+  background-color: var(--color-dark-burgundy); 
+}
+
+/* Ảnh nền làm mờ theo yêu cầu (Poster phim) */
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background-image: url('../../assets/auth-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  /* Làm mờ và hạ sáng để Form nổi lên */
+  filter: blur(8px) brightness(0.65); 
+  z-index: 0;
+}
+
+/* Glassmorphism Card */
+.auth-card {
+  /* Elegant glass effect */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  
+  padding: 25px 35px; /* Thu gọn padding trong */
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(106, 27, 36, 0.1), 0 1px 3px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 440px;
+  text-align: left;
+  z-index: 1;
+  position: relative;
+  
+  /* Beautiful 3D entrance animation */
+  animation: modalEnter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Smooth scaling and fading entrance */
+@keyframes modalEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-title {
+  color: var(--color-dark-burgundy);
+  font-size: 32px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.auth-subtitle {
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* Thu khoảng cách giữa input */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: var(--color-dark-burgundy);
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.form-group input {
+  padding: 12px 16px; /* Giảm độ mập của input */
+  border: 2px solid transparent;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-dark);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+.form-group input:focus {
+  border-color: var(--color-accent-pink);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(217, 143, 166, 0.15), 0 6px 12px rgba(217, 143, 166, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-group input::placeholder {
+  color: #b0b0b0;
+  font-weight: 400;
+}
+
+.auth-error {
+  color: white;
+  background: linear-gradient(135deg, var(--color-primary-red), var(--color-deep-red));
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(200, 75, 94, 0.3);
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+}
+
+.auth-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-top: -5px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dark);
+  cursor: pointer;
+  opacity: 0.8;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.remember-me:hover {
+  opacity: 1;
+}
+
+.remember-me input[type="checkbox"] {
+  accent-color: var(--color-primary-red);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.forgot-password {
+  color: var(--color-primary-red);
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: var(--color-deep-red);
+  text-shadow: 0 3px 6px rgba(200, 75, 94, 0.2);
+}
+
+.btn-auth-submit {
+  background: linear-gradient(135deg, var(--color-primary-red), var(--color-deep-red));
+  color: var(--white);
+  border: none;
+  padding: 14px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  margin-top: 5px; /* Ít khoảng trống hơn */
+  box-shadow: 0 8px 20px rgba(176, 30, 46, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Micro-interaction: Shine effect */
+.btn-auth-submit::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+.btn-auth-submit:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(176, 30, 46, 0.35);
+}
+
+.btn-auth-submit:hover:not(:disabled)::after {
+  left: 150%;
+}
+
+.btn-auth-submit:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(176, 30, 46, 0.3);
+}
+
+.btn-auth-submit:disabled {
+  background: var(--color-medium-pink);
+  cursor: not-allowed;
+  box-shadow: none;
+  color: rgba(255,255,255,0.7);
+}
+
+.auth-footer {
+  margin-top: 18px; /* Kéo footer sát lại */
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.auth-link {
+  color: var(--color-primary-red);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-left: 6px;
+  position: relative;
+}
+
+/* Magic underline appearing on hover */
+.auth-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-deep-red);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.auth-link:hover {
+  color: var(--color-deep-red);
+}
+
+.auth-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Back to home styling */
+.auth-back-home {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.auth-back-home a {
+  font-size: 13px;
+  color: var(--text-dark);
+  opacity: 0.5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+}
+
+.auth-back-home a:hover {
+  opacity: 1;
+  color: var(--color-dark-burgundy);
+  background: rgba(0,0,0,0.03);
+  border-radius: 8px;
+}
+
+/* --- ĐỊNH DẠNG LẠI PHẦN ICON TÀI KHOẢN --- */
+.nav-auth {
+  display: flex;
+  align-items: center;
+}
+
+.user-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa icon và chữ "Tài khoản" */
+  text-decoration: none;
+  
+  /* ĐỔI MÀU CHỮ: Chuyển sang màu hồng nhạt để nổi bật */
+  color: var(--color-light-pink) !important; 
+  
+  /* TẠO KHỐI: Thêm nền mờ nhẹ để tạo cảm giác giống nút */
+  background-color: rgba(240, 217, 225, 0.15); /* Hồng nhạt nhất với độ trong suốt 15% */
+  
+  padding: 8px 18px; /* Tăng padding để nút to và đẹp hơn */
+  border-radius: 25px; /* Bo tròn mềm mại hơn */
+  font-weight: 600; /* Tăng độ dày chữ một chút */
+  font-size: 15px; /* Giảm size chữ xuống cho gọn */
+  
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(106, 27, 36, 0.1); /* Đổ bóng nhẹ màu đỏ đô */
+}
+
+/* Hiệu ứng khi di chuột (Hover) */
+.user-nav-link:hover {
+  /* Chuyển sang nền hồng trung bình đậm hơn */
+  background-color: var(--color-medium-pink); 
+  
+  /* Chuyển màu chữ sang đỏ đô đậm nhất */
+  color: var(--color-dark-burgundy) !important;
+  
+  transform: translateY(-2px); /* Hiệu ứng bay lên nhẹ */
+  box-shadow: 0 4px 12px rgba(106, 27, 36, 0.2); /* Tăng đổ bóng */
+}
+
+/* ĐỊNH DẠNG ICON NGƯỜI DÙNG (Giả sử bạn đã thêm Icon vào React) */
+.user-nav-icon {
+  font-size: 40px; /* Kích thước icon */
+
+  color: white; 
+}

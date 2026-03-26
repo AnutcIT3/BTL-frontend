@@ -15,7 +15,7 @@ function KhuyenMai() {
                 const l = await Lucid.new(
                     new Blockfrost(
                         "https://cardano-preview.blockfrost.io/api/v0", 
-                        "previewYo2MqgqvZgJC8L6HW9p8YVnV2LYrVaSQ" // THAY BẰNG PROJECT ID CỦA BẠN TRÊN BLOCKFROST
+                        "previewYo2MqgqvZgJC8L6HW9p8YVnV2LYrVaSQ" 
                     ),
                     "Preview",
                 );

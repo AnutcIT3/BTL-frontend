@@ -178,3 +178,74 @@
     word-break: break-all;
     border: 1px solid #eee;
 }
+/* Container ví chia 2 cụm */
+.wallet-actions-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: #fffafa;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ffebeb;
+    margin-top: 30px;
+}
+
+.balance-and-button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Khoảng cách giữa cụm số dư và nút nạp tiền */
+}
+
+.system-balance-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Khoảng cách VNĐ và tADA */
+}
+
+/* VNĐ Style */
+.balance-amount-small .balance-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #d32f2f;
+}
+
+/* tADA Style mới */
+.balance-blockchain-small {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.balance-blockchain-small .ada-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0277bd; /* Màu xanh của Cardano */
+}
+
+.balance-blockchain-small .ada-currency {
+    font-size: 12px;
+    color: #0277bd;
+    font-weight: 500;
+}
+
+/* Nút nạp tiền thu nhỏ */
+.btn-recharge-small {
+    width: fit-content;
+    padding: 8px 16px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Thẻ ví Cardano bên phải */
+.blockchain-wallet-card {
+    background: white;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 10px;
+    width: 260px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}

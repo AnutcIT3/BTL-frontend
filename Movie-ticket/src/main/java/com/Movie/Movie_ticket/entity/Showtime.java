@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,6 +24,10 @@ public class Showtime {
     @ManyToOne
     @JoinColumn(name = "movie_id") // Khóa ngoại tới bảng Movie
     private Movie movie;
+
+    // @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
+    // private List<Ticket> tickets;
+
     public void setId(Long id) {
        this.showtime_id = id;
     }
