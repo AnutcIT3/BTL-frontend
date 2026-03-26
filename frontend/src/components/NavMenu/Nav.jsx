@@ -20,6 +20,7 @@ function NavMenu() {
           <li><a href="/gia-ve">Giá Vé</a></li>
           <li><Link name="phhim" to="/phim">Phim</Link></li>
           <li><Link name="khuyenmai" to="/khuyen-mai">Khuyến mãi</Link></li>
+          <li><Link name="nguoidung" to="/user">Người dùng</Link></li>
         </ul>
 
         {/* Nút hành động (Tùy chọn thêm) */}

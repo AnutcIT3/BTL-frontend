@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavMenu from './components/NavMenu';
-import Hero from './components/Hero';
-import MovieList from './components/MovieList';
-import Footer from './components/Footer';
-import KhuyenMai from './components/KhuyenMai';
-import Phim from './components/Phim';
+import NavMenu from './components/NavMenu/Nav';
+import Hero from './components/Hero/Hero';
+import Footer from './components/Footer/Footer';
+import KhuyenMai from './components/KhuyenMai/Khuyenmai';
+import Phim from './components/Phim/Phim';
 import './App.css';
-import Movie from './components/Movie';
+import Movie from './components/Movie/Movie';
+import UserProfile from './components/Userservices/UserProfile';
 
 function App() {
   return (
@@ -16,12 +16,12 @@ function App() {
         <Route path="/Rap-phim" element={
           <>
             <Hero />
-            <MovieList />
             <Movie/>
           </>
         } />
         <Route path="/phim" element={<Phim />} />
         <Route path="/khuyen-mai" element={<KhuyenMai />} />
+        <Route path="/user" element={<UserProfile />} />
       </Routes>
       <Footer />
     </BrowserRouter>
@@ -36,27 +36,5 @@ export default App;
 
 
 
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
-// import NavMenu from './components/NavMenu'
-// import './App.css'
-// import Hero from './components/Hero'
-// import MovieList from './components/MovieList'
-// import Footer from './components/Footer'
-// import KhuyenMai from './components/KhuyenMai'
 
-// function App() {
-//   return (
-//     <>
-//     <NavMenu/>
-//     <Hero/>
-//     <MovieList/>
-//     <Footer/>
-//     <Route path="/khuyen-mai" element={<KhuyenMai />} />
-//     </>
-//   )
-// }
 
-// export default App

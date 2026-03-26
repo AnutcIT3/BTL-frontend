@@ -1,5 +1,7 @@
 package com.Movie.Movie_ticket.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,4 +22,6 @@ public class User {
     private String password;
     private String role;
     private String phone;
+    @Column(name = "total_balance", precision = 15, scale = 2)
+    private BigDecimal total_balance = BigDecimal.ZERO;
 }
