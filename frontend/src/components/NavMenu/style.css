@@ -56,13 +56,14 @@
 .nav-links {
   list-style: none;
   display: flex;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
   gap: 35px;
   margin: 0;
   padding: 0;
 }
 
 .nav-links a {
-
   color: white; 
   text-decoration: none;
   font-weight: 600;

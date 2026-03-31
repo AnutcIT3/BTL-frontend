@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Lucid, Blockfrost } from 'lucid-cardano'; // Cần cài đặt: npm install lucid-cardano
+import { Lucid, Blockfrost } from 'lucid-cardano'; 
+import { useNavigate } from "react-router-dom";
 import './user-style.css';
 const UserProfile = ({ userId = 1 }) => {
     const [user, setUser] = useState(null);
@@ -9,30 +10,33 @@ const UserProfile = ({ userId = 1 }) => {
     const [walletAddr, setWalletAddr] = useState("");
     const [tAdaBalance, setTAdaBalance] = useState(0);
     const [lucid, setLucid] = useState(null);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const currentUserId = storedUser?.user_id || userId;
 
     // Hàm xử lý Đăng xuất
-    // const handleLogout = () => {
-    //     localStorage.removeItem('user');
-    //     localStorage.removeItem('token');
-    //     // Điều hướng về trang chủ và tải lại trang để Nav cập nhật
-    //     navigate('/Rap-phim');
-    //     window.location.reload(); 
-    // };
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        // Điều hướng về trang chủ và tải lại trang để Nav cập nhật
+        navigate('/Rap-phim');
+        window.location.reload(); 
+    };
 
     // 1. Lấy dữ liệu User từ Backend
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:8080/api/users/${userId}`)
-             .then(response => {
-                setUser(response.data);
-                setLoading(false);
-             })
-             .catch(error => {
-                console.error("Lỗi khi lấy dữ liệu người dùng:", error);
-                setLoading(false);
-             });
-    }, [userId]);
+        // Sử dụng currentUserId thay vì userId cố định
+        axios.get(`http://localhost:8080/api/users/${currentUserId}`)
+         .then(response => {
+            setUser(response.data);
+            setLoading(false);
+         })
+         .catch(error => {
+            console.error("Lỗi API:", error);
+            setLoading(false);
+         });
+    }, [currentUserId]);
     // 2. Khởi tạo Lucid & Tự động kiểm tra ví đã kết nối
     useEffect(() => {
         const initWeb3 = async () => {
@@ -71,9 +75,9 @@ const UserProfile = ({ userId = 1 }) => {
                         {user.full_name?.charAt(0).toUpperCase() || "U"}
                     </div>
                     <h2>{user.full_name}</h2>
-                    {/* <button className="btn-logout-profile" onClick={handleLogout}>
+                    <button className="btn-logout-profile" onClick={handleLogout}>
                         Đăng xuất
-                    </button> */}
+                    </button>
                 </div>
                 <div className="profile-body">
                     <div className="info-grid">
@@ -84,10 +88,6 @@ const UserProfile = ({ userId = 1 }) => {
                         <div className="info-group">
                             <label>Số điện thoại</label>
                             <p>{user.phone || "Chưa cập nhật"}</p>
-                        </div>
-                        <div className="info-group">
-                            <label>Id</label>
-                            <p>{user.user_id}</p>
                         </div>
                         <div className="info-group">
                             <label></label>

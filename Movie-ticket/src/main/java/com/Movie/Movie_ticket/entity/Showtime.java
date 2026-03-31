@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @Table(name = "Showtime")
@@ -23,10 +26,16 @@ public class Showtime {
 
     @ManyToOne
     @JoinColumn(name = "movie_id") // Khóa ngoại tới bảng Movie
+    @JsonIgnore
     private Movie movie;
 
-    // @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
-    // private List<Ticket> tickets;
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
+    private List<Ticket> tickets;
+
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "room_id") // Tên cột khóa ngoại trong DB
+    // @JsonBackReference // Ngăn đệ quy JSON khi gọi từ Room -> Showtime -> Room
+    // private Room room;
 
     public void setId(Long id) {
        this.showtime_id = id;

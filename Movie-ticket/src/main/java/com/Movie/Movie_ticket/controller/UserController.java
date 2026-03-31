@@ -30,4 +30,15 @@ public class UserController {
     public User createMovie(@RequestBody User user) {
         return userRepository.save(user);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginDetails) {
+        // Tìm user theo email trong database
+        return userRepository.findAll().stream()
+            .filter(u -> u.getEmail().equals(loginDetails.getEmail()) 
+                      && u.getPassword().equals(loginDetails.getPassword()))
+            .findFirst()
+            .map(user -> ResponseEntity.ok((Object) user)) // Ép kiểu về Object để đồng nhất
+            .orElse(ResponseEntity.status(401).body("Sai email hoặc mật khẩu")); 
+    }
 }

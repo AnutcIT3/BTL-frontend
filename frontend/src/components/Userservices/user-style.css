@@ -249,3 +249,28 @@
     width: 260px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
+/* Định dạng nút Đăng xuất */
+.btn-logout-profile {
+    background-color: #f8f9fa; /* Màu nền sáng nhẹ */
+    color: #dc3545;            /* Chữ màu đỏ để cảnh báo logout */
+    border: 1px solid #dc3545; /* Viền đỏ mảnh */
+    padding: 8px 20px;
+    border-radius: 20px;       /* Bo tròn mềm mại */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+/* Hiệu ứng khi di chuột qua (Hover) */
+.btn-logout-profile:hover {
+    background-color: #dc3545; /* Đổi nền sang đỏ */
+    color: white;              /* Chữ sang trắng */
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2); /* Đổ bóng nhẹ */
+    transform: translateY(-2px); /* Nhích nhẹ lên trên */
+}
+
+/* Hiệu ứng khi bấm vào */
+.btn-logout-profile:active {
+    transform: translateY(0);
+}

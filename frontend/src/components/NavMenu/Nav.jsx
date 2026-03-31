@@ -10,14 +10,11 @@ function NavMenu() {
   const location = useLocation();
 
   // Kiểm tra trạng thái đăng nhập mỗi khi chuyển trang hoặc component mount
-  useEffect(() => {
-    const user = localStorage.getItem("user"); 
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [location]); // Theo dõi location để cập nhật lại giao diện khi chuyển trang
+useEffect(() => {
+    // Kiểm tra trạng thái mỗi khi URL thay đổi
+    const user = localStorage.getItem("user");
+    setIsLoggedIn(!!user); 
+  }, [location]);
 
   return (
     <nav className="navbar">
@@ -36,6 +33,7 @@ function NavMenu() {
           <li><Link to="/gia-ve">Giá Vé</Link></li>
           <li><Link to="/phim">Phim</Link></li>
           <li><Link to="/khuyen-mai">Khuyến mãi</Link></li>
+          <li><Link to="/user">Nguoi dung</Link></li>
           {/* <li><Link to="/user">Người dùng</Link></li> */}
         </ul>
 

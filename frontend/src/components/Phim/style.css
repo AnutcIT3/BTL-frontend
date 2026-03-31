@@ -12,6 +12,8 @@
     justify-content: center;
     gap: 30px;
     margin-bottom: 30px;
+    position: relative; /* Đảm bảo nó nằm trong luồng hiển thị */
+    z-index: 10; 
 }
 
 .phim-tabs button {
@@ -117,8 +119,8 @@
 }
 
 /* Màu riêng cho từng loại badge */
-.badge.T18 { background: #e53e3e; }
-.badge.T13 { background: #dd6b20; }
+.badge.C18 { background: #e53e3e; }
+.badge.C13 { background: #dd6b20; }
 .badge.P { background: #38a169; }
 
 /* --- THÔNG TIN PHIM --- */

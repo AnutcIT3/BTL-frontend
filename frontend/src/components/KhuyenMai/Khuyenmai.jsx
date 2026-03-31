@@ -6,11 +6,10 @@ function KhuyenMai() {
     const [lucid, setLucid] = useState(null);
     const [walletAddr, setWalletAddr] = useState("");
     const [loading, setLoading] = useState(false);
-    const [connectedWalletName, setConnectedWalletName] = useState("");
 
-    // 1. Khởi tạo Lucid với mạng Preview khi trang web load
+    // 1. Tự động kết nối ví ngay khi vào trang
     useEffect(() => {
-        const initLucid = async () => {
+        const autoConnect = async () => {
             try {
                 const l = await Lucid.new(
                     new Blockfrost(
@@ -20,69 +19,74 @@ function KhuyenMai() {
                     "Preview",
                 );
                 setLucid(l);
+
+                const walletName = 'eternl'; // Ưu tiên Eternl
+                if (window.cardano && window.cardano[walletName]) {
+                    const api = await window.cardano[walletName].enable();
+                    l.selectWallet(api);
+                    const addr = await l.wallet.address();
+                    setWalletAddr(addr);
+                }
             } catch (err) {
-                console.error("Lỗi khởi tạo Lucid:", err);
+                console.error("Lỗi kết nối ví:", err);
             }
         };
-        initLucid();
+        autoConnect();
     }, []);
 
-    // 2. Hàm kết nối ví người dùng chọn
-    const connectWallet = async (walletName) => {
-        try {
-            if (!window.cardano || !window.cardano[walletName]) {
-                alert(`Máy tính của bạn chưa cài đặt ví ${walletName.toUpperCase()}!`);
-                return;
-            }
-            const api = await window.cardano[walletName].enable();
-            lucid.selectWallet(api);
-            const addr = await lucid.wallet.address();
-            
-            setWalletAddr(addr);
-            setConnectedWalletName(walletName);
-            alert(`Đã kết nối thành công với ví ${walletName}!`);
-        } catch (error) {
-            console.error("Lỗi kết nối:", error);
-            alert("Bạn đã từ chối kết nối ví.");
-        }
-    };
-
-    // Hàm Hủy kết nối
-    const disconnectWallet = () => {
-        setWalletAddr("");
-        setConnectedWalletName("");
-        // Tùy chọn: nếu bạn muốn ép trình duyệt quên kết nối cũ hoàn toàn
-        // có thể reload hoặc xóa session nếu cần, nhưng set state là đủ để quay về UI chọn ví.
-        alert("Đã hủy kết nối ví.");
-    };
-
-    // 3. Logic gửi tADA tự động từ ví Admin
-    async function claimReward() {
-        if (!walletAddr) {
-            alert("Vui lòng chọn và kết nối ví trước!");
-            return;
-        }
+    // 2. Hàm mua vé bằng tADA (Người dùng gửi tADA cho rạp phim)
+    const buyTicketWithTADA = async () => {
+        if (!lucid || !walletAddr) return;
 
         try {
             setLoading(true);
-            const rewardAmount = 5; // Số tADA tặng cố định (ví dụ 5 tADA)
+            const ticketPriceADA = 10; // Giả định giá vé là 10 tADA
+            const cinemaAddress = "addr_test1vpf99026v5nllm7ry2s6x0p4m0c29xuj8m70e8v6a386vugq3e8z6"; // Thay bằng ví nhận tiền của bạn
 
-            // CẢNH BÁO: Seed Phrase ví Admin nạp sẵn tiền Preview
+            // Tạo giao dịch thanh toán
+            const tx = await lucid.newTx()
+                .payToAddress(cinemaAddress, { lovelace: BigInt(ticketPriceADA * 1000000) })
+                .complete();
+
+            // Người dùng ký tên xác nhận thanh toán
+            const signedTx = await tx.sign().complete();
+            const txHash = await signedTx.submit();
+
+            alert(`Thanh toán thành công! \nMã giao dịch: ${txHash}\nBạn đã mua vé bằng 10 tADA.`);
+            
+            // Ở đây bạn có thể gọi API Backend để lưu trạng thái "Đã thanh toán" cho Ticket
+        } catch (error) {
+            console.error("Lỗi thanh toán:", error);
+            alert("Thanh toán bị hủy hoặc thất bại.");
+        } finally {
+            setLoading(false);
+        }
+    };
+    async function claimReward() {
+        if (!walletAddr || !lucid) return;
+
+        try {
+            setLoading(true);
+            const rewardAmount = 5;
             const adminSeed = "enable moment educate sense sponsor casual twist rapid almost announce allow floor slab imitate finger poem stool attack original pledge head physical demand alley"; 
+            
+            // Lưu lại ví người dùng để gửi tới
+            const userAddr = walletAddr;
+
+            // Switch sang ví Admin để ký giao dịch
             lucid.selectWalletFromSeed(adminSeed);
 
-            // Tạo giao dịch gửi tiền cho người dùng đang kết nối
             const tx = await lucid.newTx()
-                .payToAddress(walletAddr, { lovelace: BigInt(rewardAmount * 1000000) })
+                .payToAddress(userAddr, { lovelace: BigInt(rewardAmount * 1000000) })
                 .complete();
 
             const signedTx = await tx.sign().complete();
             const txHash = await signedTx.submit();
 
-            alert(`Chúc mừng! Bạn đã nhận được ${rewardAmount} tADA từ Admin.\nTransaction Hash: ${txHash}`);
+            alert(`Thành công! tADA đang được gửi đến ví của bạn.\nHash: ${txHash}`);
         } catch (error) {
-            console.error("Lỗi giao dịch:", error);
-            alert("Giao dịch thất bại! Hãy kiểm tra số dư ví Admin hoặc ID Blockfrost.");
+            console.error("Lỗi:", error);
+            alert("Giao dịch thất bại.");
         } finally {
             setLoading(false);
         }
@@ -92,44 +96,41 @@ function KhuyenMai() {
         <div className="promo-page">
             <section className="promo-hero">
                 <div className="hero-content">
-                    <h1>Sự Kiện Web3 Movie</h1>
+                    <h1>Web3 Cinema - Thanh toán Blockchain</h1>
                     
                     <div className="wallet-section">
-                        {!walletAddr ? (
-                            <div className="connect-group">
-                                <h3>Bước 1: Chọn ví của bạn</h3>
-                                <div className="wallet-buttons">
-                                    <button onClick={() => connectWallet('eternl')} className="btn-wallet">
-                                        Kết nối Eternl
-                                    </button>
-                                    <button onClick={() => connectWallet('nami')} className="btn-wallet nami">
-                                        Kết nối Nami
+                        {walletAddr ? (
+                            <div className="reward-group">
+                                <div className="status-box">
+                                    <p>Đã kết nối: <strong>{walletAddr.slice(0, 10)}...{walletAddr.slice(-8)}</strong></p>
+                                </div>
+
+                                <div className="action-buttons">
+                                    {/* Phần mua vé mới */}
+                                    <div className="ticket-buy-box">
+                                        <h3>Vé Phim Đặc Biệt (Combo Web3)</h3>
+                                        <p>Giá ưu đãi: <span className="price-tag">50 tADA</span></p>
+                                        <button 
+                                            onClick={buyTicketWithTADA} 
+                                            className="btn-claim"
+                                            disabled={loading}
+                                        >
+                                            {loading ? "ĐANG XỬ LÝ..." : "MUA VÉ BẰNG tADA"}
+                                        </button>
+                                    </div>
+                                    
+                                    <hr />
+                                    <p>Hoặc nhận quà tặng trải nghiệm:</p>
+                                    <button 
+                                       className="btn-claim"
+                                       onClick={claimReward}
+                                       >
+                                        NHẬN 5 tADA FREE
                                     </button>
                                 </div>
                             </div>
                         ) : (
-                            <div className="reward-group">
-                                <div className="status-box">
-                                    <div className="status-header">
-                                        <span className="dot"></span>
-                                        <p>Đang dùng ví: <strong>{connectedWalletName}</strong></p>
-                                        {/* Nút Hủy kết nối */}
-                                        <button onClick={disconnectWallet} className="btn-disconnect">
-                                            Hủy kết nối
-                                        </button>
-                                    </div>
-                                    <small>{walletAddr.slice(0, 12)}...{walletAddr.slice(-8)}</small>
-                                </div>
-                                
-                                <h3>Bước 2: Nhận quà tặng</h3>
-                                <button 
-                                    onClick={claimReward} 
-                                    className="btn-claim" 
-                                    disabled={loading}
-                                >
-                                    {loading ? "ĐANG XỬ LÝ..." : "NHẬN 5 tADA NGAY"}
-                                </button>
-                            </div>
+                            <p className="loading-text">Đang yêu cầu quyền truy cập ví Cardano...</p>
                         )}
                     </div>
                 </div>

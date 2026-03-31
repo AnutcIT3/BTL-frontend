@@ -23,7 +23,7 @@ function Login() {
 
     try {
       // Gửi yêu cầu POST tới API backend Spring Boot
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post('http://localhost:8080/api/users/login', {
         email: email,
         password: password
       });

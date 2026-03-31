@@ -5,8 +5,11 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Data
+@Table(name = "Ticket")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +33,11 @@ public class Ticket {
     @JoinColumn(name = "user_id")
     private User user;
 
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "seat_id") // Tên cột khóa ngoại trong bảng MySQL
+    // @JsonBackReference // Ngăn lỗi lặp vô tận JSON
+    // private Seat seat;
+    
     public Showtime getShowtime(){
         return showtime;
     }

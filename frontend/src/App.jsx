@@ -9,6 +9,7 @@ import Movie from './components/Movie/Movie';
 import UserProfile from './components/Userservices/UserProfile';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import LichChieu from './components/LichChieu/LichChieu';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/user" element={<UserProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path='/lich-chieu' element={<LichChieu/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

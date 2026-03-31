@@ -87,7 +87,7 @@
     font-size: 1.1rem;
     border-radius: 100px; /* Bo tròn hoàn toàn */
     cursor: pointer;
-    font-weight: 800;
+    font-weight: 100;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 0.4s;
