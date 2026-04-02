@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Data
@@ -30,6 +31,7 @@ public class Showtime {
     private Movie movie;
 
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("showtime")
     private List<Ticket> tickets;
 
     // @ManyToOne(fetch = FetchType.LAZY)

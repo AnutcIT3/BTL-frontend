@@ -21,14 +21,14 @@ useEffect(() => {
       <div className="nav-container">
         {/* Phần Logo */}
         <div className="nav-logo">
-          <Link to="/Rap-phim">
+          <Link to="/">
             <img src={logoImg} alt="Logo" className="logo-image" />
           </Link>
         </div>
 
         {/* Phần Menu đường dẫn */}
         <ul className="nav-links">
-          <li><Link to="/Rap-phim">Rạp phim</Link></li>
+          <li><Link to="/">Rạp phim</Link></li>
           <li><Link to="/lich-chieu">Lịch Chiếu</Link></li>
           <li><Link to="/gia-ve">Giá Vé</Link></li>
           <li><Link to="/phim">Phim</Link></li>

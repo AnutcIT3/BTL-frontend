@@ -40,8 +40,8 @@ function KhuyenMai() {
 
         try {
             setLoading(true);
-            const ticketPriceADA = 10; // Giả định giá vé là 10 tADA
-            const cinemaAddress = "addr_test1vpf99026v5nllm7ry2s6x0p4m0c29xuj8m70e8v6a386vugq3e8z6"; // Thay bằng ví nhận tiền của bạn
+            const ticketPriceADA = 1; // Giả định giá vé là 10 tADA
+            const cinemaAddress = "addr_test1qp3lxm8qfq3ss4wgndkr4vun59aq7c9zs94j079q9nm45xfue39xu6nmpqk9uzpm3mkz0mgq2eaz6hghvw6kvvvjsx4sacdu8h"; // Thay bằng ví nhận tiền của bạn
 
             // Tạo giao dịch thanh toán
             const tx = await lucid.newTx()
@@ -92,7 +92,7 @@ function KhuyenMai() {
         }
     }
 
-    return (
+    return (    
         <div className="promo-page">
             <section className="promo-hero">
                 <div className="hero-content">

@@ -1,0 +1,14 @@
+.ticket-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.ticket-container img {
+    margin-top: 80px;
+    max-width: 65%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

@@ -53,7 +53,8 @@ const Movie = () => {
                             />
                         </div>
                         <h3>{movie.title}</h3>
-                        <p>{movie.genre}</p>
+                        <p><strong>Thể loại: </strong>{movie.genre}</p>
+                        <p><strong>Thời lượng: </strong>{movie.duration_minutes} phút</p>
                         
                         {/* Thêm nút Xem Trailer riêng biệt */}
                         <div className="card-buttons">

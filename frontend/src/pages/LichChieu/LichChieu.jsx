@@ -38,7 +38,7 @@ const LichChieu = () => {
                         </div>
 
                         <div className="phim-content-right">
-                            <h3>{movie.title}</h3>
+                              <h3>{movie.title}</h3>
                             <p className="genre">Thể loại: {movie.genre}</p>
                             
                             <div className="showtimes-grid">

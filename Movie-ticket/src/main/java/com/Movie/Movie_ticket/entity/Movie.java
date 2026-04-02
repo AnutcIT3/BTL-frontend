@@ -5,6 +5,8 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Data
 @Table(name = "Movie")
@@ -31,5 +33,6 @@ public class Movie {
 
     // Quan hệ 1 Movie có nhiều Showtime (Lịch chiếu)
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("movie")
     private List<Showtime> showtimes;
 }

@@ -75,9 +75,10 @@
 
 .movie-card p {
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 15px;
   padding: 0 10px;
+  text-align: left;
 }
 
 /* --- 3. HỆ THỐNG NÚT BẤM (CẬP NHẬT MỚI) --- */
