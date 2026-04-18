@@ -12,4 +12,10 @@ public class LoginResponse {
     private String email;
     private String role;
 }
+<<<<<<< ours
+<<<<<<< HEAD
 
+=======
+>>>>>>> 86d06c8f66e2cfcd9df6410c4becbe03dd6a5e3f
+=======
+>>>>>>> theirs
