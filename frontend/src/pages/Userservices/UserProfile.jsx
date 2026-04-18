@@ -1,43 +1,58 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Lucid, Blockfrost } from 'lucid-cardano'; 
+import { Lucid, Blockfrost } from 'lucid-cardano';
 import { useNavigate } from "react-router-dom";
 import './user-style.css';
+
 const UserProfile = ({ userId = 1 }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    // State cho Wallet
     const [walletAddr, setWalletAddr] = useState("");
     const [tAdaBalance, setTAdaBalance] = useState(0);
-    const [lucid, setLucid] = useState(null);
     const navigate = useNavigate();
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    const currentUserId = storedUser?.user_id || userId;
 
-    // Hàm xử lý Đăng xuất
+    const parseStoredUser = () => {
+        try {
+            const rawUser = localStorage.getItem('user');
+            if (!rawUser || rawUser === 'undefined' || rawUser === 'null') {
+                return null;
+            }
+            return JSON.parse(rawUser);
+        } catch (err) {
+            console.error('Dữ liệu user trong localStorage không hợp lệ:', err);
+            return null;
+        }
+    };
+
+    const storedUser = parseStoredUser();
+    const currentUserId = storedUser?.user_id ?? storedUser?.userId ?? userId;
+
     const handleLogout = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        // Điều hướng về trang chủ và tải lại trang để Nav cập nhật
-        navigate('/Rap-phim');
-        window.location.reload(); 
+        navigate('/');
+        window.location.reload();
     };
 
-    // 1. Lấy dữ liệu User từ Backend
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token || !storedUser) {
+            navigate('/login');
+            return;
+        }
+
         setLoading(true);
-        // Sử dụng currentUserId thay vì userId cố định
         axios.get(`http://localhost:8080/api/users/${currentUserId}`)
-         .then(response => {
-            setUser(response.data);
-            setLoading(false);
-         })
-         .catch(error => {
-            console.error("Lỗi API:", error);
-            setLoading(false);
-         });
-    }, [currentUserId]);
-    // 2. Khởi tạo Lucid & Tự động kiểm tra ví đã kết nối
+            .then(response => {
+                setUser(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Lỗi API:", error);
+                setLoading(false);
+            });
+    }, [currentUserId, navigate, storedUser]);
+
     useEffect(() => {
         const initWeb3 = async () => {
             try {
@@ -48,8 +63,6 @@ const UserProfile = ({ userId = 1 }) => {
                     ),
                     "Preview",
                 );
-                setLucid(l);
-                // Kiểm tra xem trình duyệt có ví nào đang "enabled" không (ví dụ: eternl)
                 if (window.cardano && window.cardano.eternl) {
                     const api = await window.cardano.eternl.enable();
                     l.selectWallet(api);
@@ -65,8 +78,10 @@ const UserProfile = ({ userId = 1 }) => {
         };
         initWeb3();
     }, []);
+
     if (loading) return <div className="loader">Đang tải thông tin...</div>;
     if (!user) return <div className="error">Không tìm thấy người dùng!</div>;
+
     return (
         <div className="profile-container">
             <div className="profile-card">
@@ -98,14 +113,12 @@ const UserProfile = ({ userId = 1 }) => {
                         <div className="balance-and-button-group">
                             <div className="system-balance-info">
                                 <label>Số dư hệ thống</label>
-                                {/* Số dư VNĐ */}
                                 <div className="balance-amount-small">
                                     <span className="balance-value">
                                         {user.total_balance?.toLocaleString() || '0'}
                                     </span>
                                     <span className="balance-currency">VNĐ</span>
                                 </div>
-                                {/* HIỂN THỊ SỐ DƯ tADA NGAY DƯỚI */}
                                 <div className="balance-blockchain-small">
                                     <span className="ada-value">{tAdaBalance.toFixed(2)}</span>
                                     <span className="ada-currency">tADA</span>
@@ -122,7 +135,6 @@ const UserProfile = ({ userId = 1 }) => {
                                 <div className="wallet-card-address">
                                     <label>Địa chỉ đang kết nối:</label>
                                     <code>
-
                                         {walletAddr
                                             ? `${walletAddr.slice(0, 10)}...${walletAddr.slice(-8)}`
                                             : "Chưa kết nối ví"}
@@ -134,7 +146,7 @@ const UserProfile = ({ userId = 1 }) => {
                 </div>
             </div>
         </div>
-
     );
 }
+
 export default UserProfile;

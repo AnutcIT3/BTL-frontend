@@ -97,7 +97,7 @@ function KhuyenMai() {
             <section className="promo-hero">
                 <div className="hero-content">
                     <h1>Web3 Cinema - Thanh toán Blockchain</h1>
-                    
+                    A
                     <div className="wallet-section">
                         {walletAddr ? (
                             <div className="reward-group">

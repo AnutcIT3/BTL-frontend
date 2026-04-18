@@ -12,6 +12,7 @@ import Register from './pages/Register/Register';
 import LichChieu from './pages/LichChieu/LichChieu';
 import TicketDetail from './pages/TicketDetailPage/TicketDetailPage';
 import PromotionSection from './pages/PromotionSelection/PromotionSelection';
+import MovieDetailPage from './pages/MovieDetailPage/MovieDetailPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path='/lich-chieu' element={<LichChieu/>}/>
         <Route path='/gia-ve' element={<TicketDetail/>}/>
+        <Route path='/movie/:id' element={<MovieDetailPage/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

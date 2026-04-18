@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Đảm bảo đã npm install axios
+import axios from 'axios';
 import './style.css';
 
 function Login() {
@@ -22,28 +22,32 @@ function Login() {
     setLoading(true);
 
     try {
-      // Gửi yêu cầu POST tới API backend Spring Boot
       const response = await axios.post('http://localhost:8080/api/users/login', {
-        email: email,
-        password: password
+        email,
+        password,
       });
 
-      // Kiểm tra phản hồi từ backend
-      if (response.data && response.data.token) {
-        // 1. Lưu JWT Token để dùng cho các request sau
-        localStorage.setItem('token', response.data.token); 
-        
-        // 2. Lưu thông tin User để hiển thị Icon trên Nav
-        // Giả sử backend trả về object user trong response.data.user
-        localStorage.setItem('user', JSON.stringify(response.data.user)); 
+      if (response.data?.token) {
+        localStorage.setItem('token', response.data.token);
 
-        // 3. Điều hướng về trang chính
-        navigate('/Rap-phim'); 
+        const normalizedUser = {
+          user_id: response.data.userId,
+          full_name: response.data.fullName,
+          email: response.data.email,
+          role: response.data.role,
+        };
+
+        localStorage.setItem('user', JSON.stringify(normalizedUser));
+        navigate('/');
+      } else {
+        setError('Đăng nhập thất bại, dữ liệu trả về không hợp lệ.');
       }
     } catch (err) {
-      // Xử lý lỗi từ backend (401 Unauthorized, 404 Not Found, v.v.)
-      if (err.response && err.response.data) {
-        setError(err.response.data.message || 'Email hoặc mật khẩu không chính xác.');
+      if (err.response?.data) {
+        const message = typeof err.response.data === 'string'
+          ? err.response.data
+          : err.response.data.message;
+        setError(message || 'Email hoặc mật khẩu không chính xác.');
       } else {
         setError('Không thể kết nối đến máy chủ. Vui lòng thử lại sau.');
       }
@@ -93,9 +97,9 @@ function Login() {
         <div className="auth-footer">
           Chưa có tài khoản? <Link to="/register" className="auth-link">Đăng ký ngay</Link>
         </div>
-        
+
         <div className="auth-back-home">
-             <Link to="/Rap-phim">Trở về trang chủ</Link>
+          <Link to="/">Trở về trang chủ</Link>
         </div>
       </div>
     </div>

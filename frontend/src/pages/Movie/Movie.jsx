@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 const Movie = () => {
     const [movies, setMovies] = useState([]);
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState(1);
     const [selectedMovie, setSelectedMovie] = useState(null); 
     useEffect(() => {
@@ -52,7 +54,12 @@ const Movie = () => {
                                 onError={(e) => { e.target.src = 'https://via.placeholder.com/200x300?text=No+Image'; }}
                             />
                         </div>
-                        <h3>{movie.title}</h3>
+                        <h3
+                            className="movie-title-link"
+                            onClick={() => navigate(`/movie/${movie.movie_id}`)}
+                        >
+                            {movie.title}
+                        </h3>
                         <p><strong>Thể loại: </strong>{movie.genre}</p>
                         <p><strong>Thời lượng: </strong>{movie.duration_minutes} phút</p>
                         
