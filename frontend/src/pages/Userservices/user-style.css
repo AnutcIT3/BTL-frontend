@@ -2,275 +2,221 @@
 .profile-container {
     width: 100%;
     min-height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #f8f9fa; 
     display: flex;
     justify-content: center;
-    padding: 40px 0;
+    padding: 100px 0 50px 0; 
+    font-family: Arial, sans-serif;
 }
 
-/* Thẻ card mở rộng */
-.profile-card {
+.profile-card-wrapper {
     background: white;
-    width: 95%;
-    max-width: 1300px;
-    display: flex; /* Chia 2 cột chính */
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 1100px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     overflow: hidden;
-    min-height: 700px;
 }
 
-/* --- CỘT TRÁI: AVATAR (Màu đỏ đô) --- */
-.profile-header {
-    flex: 0 0 400px; /* Cố định độ rộng cột trái */
-    background: linear-gradient(180deg, #8e0000, #4a0000);
-    color: white;
+/* --- HEADER TABS --- */
+.profile-tabs-header {
+    border-bottom: 2px solid #eaeaea; 
+    padding: 0 30px;
+}
+
+.profile-tabs {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 30px; 
+}
+
+.tab-item {
+    padding: 20px 0 15px 0;
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab-item:hover { color: #034ea2; }
+.tab-item.active { color: #034ea2; }
+.tab-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; 
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #034ea2;
+}
+
+/* --- NỘI DUNG TAB --- */
+.profile-tab-content { padding: 40px; }
+
+/* --- CHIA 2 CỘT CHO TAB THÔNG TIN --- */
+.tab-account-info {
+    display: flex;
+    flex-direction: row;
+    gap: 50px; 
+}
+
+/* --- CỘT TRÁI: AVATAR VÀ NÚT BẤM (Fix lỗi bấm không được ở đây) --- */
+.avatar-left-col {
+    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 40px;
 }
 
 .avatar-circle {
     width: 150px;
     height: 150px;
-    background: white;
-    color: #8e0000;
+    background-color: #4db6ac; 
+    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 60px;
     font-weight: bold;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    margin-bottom: 25px;
+    overflow: hidden; /* Cắt ảnh tròn trịa */
 }
 
-/* --- CỘT PHẢI: THÔNG TIN --- */
-.profile-body {
-    flex: 1; /* Tự động giãn nở phần còn lại */
-    padding: 60px;
+/* Ép ảnh vừa vặn với khung tròn */
+.avatar-img-fit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-buttons {
     display: flex;
-    flex-direction: column;
-    background: white;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
 }
 
-/* Nhóm thông tin Email/SĐT */
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: auto; /* Đẩy cụm ví xuống đáy */
-}
-
-.info-group {
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
-}
-
-.info-group label {
+/* Reset chung cho 2 nút */
+.btn-upload-photo, .btn-save-photo {
+    padding: 8px 12px;
     font-size: 12px;
-    color: #999;
-    text-transform: uppercase;
     font-weight: bold;
-}
-
-.info-group p {
-    font-size: 18px;
-    color: #333;
-    margin-top: 5px;
-    font-weight: 500;
-}
-
-/* --- PHẦN VÍ VÀ HÀNH ĐỘNG (FIX LỖI TRÀN) --- */
-.wallet-actions-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    background: #fffafa;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #ffe5e5;
-    margin-top: 40px;
-}
-
-/* Cụm Số dư và Nút bên trái */
-.balance-and-button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.system-balance-info label {
-    font-size: 14px;
-    color: #666;
-}
-
-.balance-amount-small .balance-value {
-    font-size: 28px; /* Thu nhỏ số tiền */
-    font-weight: 700;
-    color: #d32f2f;
-}
-
-.balance-amount-small .balance-currency {
-    font-size: 16px;
-    color: #d32f2f;
-    margin-left: 5px;
-}
-
-/* Nút nạp tiền nhỏ gọn */
-.btn-recharge-small {
-    width: fit-content;
-    padding: 10px 25px;
-    background: #222;
-    color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: 0.3s;
+    display: inline-block; /* Quan trọng để Label hiển thị như một khối nút */
+    text-align: center;
+    box-sizing: border-box;
 }
 
-.btn-recharge-small:hover {
-    background: #8e0000;
-}
-
-/* Thẻ ví Cardano bên phải --- */
-.blockchain-wallet-card {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 10px;
-    width: 280px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.wallet-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.wallet-card-header strong {
-    font-size: 12px;
-    color: #444;
-}
-
-.network-badge {
-    background: #e3f2fd;
-    color: #1565c0;
-    font-size: 9px;
-    padding: 2px 8px;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-.wallet-card-address code {
-    display: block;
-    background: #f9f9f9;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 11px;
+.btn-upload-photo {
+    background-color: #e0e0e0;
     color: #555;
-    word-break: break-all;
-    border: 1px solid #eee;
-}
-/* Container ví chia 2 cụm */
-.wallet-actions-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    background: #fffafa;
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid #ffebeb;
-    margin-top: 30px;
+    transition: background-color 0.2s;
 }
 
-.balance-and-button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Khoảng cách giữa cụm số dư và nút nạp tiền */
-}
+.btn-upload-photo:hover { background-color: #d5d5d5; }
 
-.system-balance-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px; /* Khoảng cách VNĐ và tADA */
-}
-
-/* VNĐ Style */
-.balance-amount-small .balance-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: #d32f2f;
-}
-
-/* tADA Style mới */
-.balance-blockchain-small {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-}
-
-.balance-blockchain-small .ada-value {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0277bd; /* Màu xanh của Cardano */
-}
-
-.balance-blockchain-small .ada-currency {
-    font-size: 12px;
-    color: #0277bd;
-    font-weight: 500;
-}
-
-/* Nút nạp tiền thu nhỏ */
-.btn-recharge-small {
-    width: fit-content;
-    padding: 8px 16px;
-    background: #333;
+.btn-save-photo {
+    background-color: #4db6ac;
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 13px;
-    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
 }
 
-/* Thẻ ví Cardano bên phải */
-.blockchain-wallet-card {
-    background: white;
-    border: 1px solid #eee;
-    padding: 15px;
-    border-radius: 10px;
-    width: 260px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-/* Định dạng nút Đăng xuất */
-.btn-logout-profile {
-    background-color: #f8f9fa; /* Màu nền sáng nhẹ */
-    color: #dc3545;            /* Chữ màu đỏ để cảnh báo logout */
-    border: 1px solid #dc3545; /* Viền đỏ mảnh */
-    padding: 8px 20px;
-    border-radius: 20px;       /* Bo tròn mềm mại */
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+.btn-save-photo:hover:not(:disabled) {
+    background-color: #3f9e95;
 }
 
-/* Hiệu ứng khi di chuột qua (Hover) */
-.btn-logout-profile:hover {
-    background-color: #dc3545; /* Đổi nền sang đỏ */
-    color: white;              /* Chữ sang trắng */
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2); /* Đổ bóng nhẹ */
-    transform: translateY(-2px); /* Nhích nhẹ lên trên */
+/* Trạng thái bị khóa của nút LƯU ẢNH */
+.btn-save-photo:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-/* Hiệu ứng khi bấm vào */
-.btn-logout-profile:active {
-    transform: translateY(0);
+/* --- CỘT PHẢI: FORM --- */
+.form-right-col { flex: 1; }
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px 30px;
 }
+.form-group { display: flex; flex-direction: column; }
+.form-group-full { grid-column: span 2; }
+.form-group label {
+    font-size: 13px; color: #333; margin-bottom: 8px; font-weight: bold;
+}
+.text-danger { color: red; }
+.form-group input, .form-group select {
+    padding: 10px 15px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;
+}
+.form-group input:focus, .form-group select:focus {
+    border-color: #034ea2; outline: none;
+}
+.form-group input.input-readonly {
+    background-color: #f5f5f5; color: #888; cursor: not-allowed;
+}
+.form-footer {
+    display: flex; justify-content: flex-end; align-items: center; margin-top: 30px; gap: 25px;
+}
+.change-password-link {
+    font-size: 14px; color: #034ea2; text-decoration: underline; cursor: pointer; font-style: italic;
+}
+.btn-update {
+    background-color: #034ea2; color: white; border: none; padding: 10px 35px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px;
+}
+.btn-update:hover { background-color: #023670; }
+
+/* --- TAB VÍ CARDANO --- */
+.tab-cardano-wallet { max-width: 600px; margin: 0 auto; }
+.wallet-actions-section {
+    display: flex; flex-direction: column; gap: 20px; background: #f9f9f9; padding: 25px; border-radius: 8px; border: 1px solid #ddd;
+}
+.balance-and-button-group { display: flex; justify-content: space-between; align-items: center; }
+.system-balance-info label { font-size: 13px; color: #666; font-weight: bold; }
+.balance-value { font-size: 24px; font-weight: bold; color: #d32f2f; }
+.balance-currency { font-size: 14px; color: #d32f2f; margin-left: 5px; }
+.ada-value { font-size: 16px; font-weight: bold; color: #034ea2; }
+.ada-currency { font-size: 12px; color: #034ea2; margin-left: 5px; }
+.btn-recharge-small {
+    background: #034ea2; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;
+}
+.blockchain-wallet-card { background: white; border: 1px solid #ccc; padding: 15px; border-radius: 6px; }
+.wallet-card-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px; font-weight: bold; }
+.network-badge { background: #e3f2fd; color: #034ea2; padding: 2px 8px; border-radius: 4px; }
+.wallet-card-address code { background: #f4f4f4; padding: 8px; display: block; border-radius: 4px; font-size: 12px; }
+.tab-placeholder { text-align: center; color: #888; margin-top: 40px; }
+
+/* --- MODAL ĐỔI MẬT KHẨU --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 100000;
+}
+.password-modal {
+    background: white; padding: 30px 40px; border-radius: 10px; width: 450px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); animation: slideDown 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.password-modal h3 {
+    margin-top: 0; margin-bottom: 25px; color: #034ea2; text-align: center; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;
+}
+.form-group-modal { display: flex; flex-direction: column; margin-bottom: 15px; }
+.form-group-modal label { font-size: 13px; font-weight: bold; color: #444; margin-bottom: 8px; }
+.form-group-modal input {
+    padding: 12px 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; transition: border-color 0.2s;
+}
+.form-group-modal input:focus { border-color: #034ea2; outline: none; box-shadow: 0 0 0 3px rgba(3, 78, 162, 0.1); }
+.modal-actions { display: flex; justify-content: space-between; margin-top: 30px; gap: 15px; }
+.btn-cancel {
+    flex: 1; background: #f1f1f1; color: #555; border: none; padding: 12px 0; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.2s;
+}
+.btn-confirm {
+    flex: 1; background: #034ea2; color: white; border: none; padding: 12px 0; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.2s;
+}
+.btn-cancel:hover { background: #e0e0e0; }
+.btn-confirm:hover { background: #023670; }
