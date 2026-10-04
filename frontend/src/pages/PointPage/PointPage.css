@@ -1,0 +1,11 @@
+.points-tab-container { padding: 15px 0; }
+.section-heading { font-size: 16px; font-weight: bold; margin-bottom: 20px; margin-top: 20px; }
+.text-blue { color: #0b4a8e; }
+.text-green { color: #2e7d32; }
+.text-red { color: #d32f2f; }
+.points-overview-section { margin-bottom: 40px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #eee; max-width: 500px;}
+.overview-grid { display: flex; flex-direction: column; gap: 15px; }
+.overview-row { display: flex; justify-content: space-between; align-items: center; font-size: 15px; border-bottom: 1px dashed #ddd; padding-bottom: 10px;}
+.overview-row:last-child { border-bottom: none; padding-bottom: 0; }
+.overview-label { color: #555; }
+.overview-value { font-weight: bold; }
